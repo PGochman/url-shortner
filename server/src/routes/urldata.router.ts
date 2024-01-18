@@ -1,19 +1,38 @@
 import { Router } from "express";
-const urldataRouter = Router()
-import createUrl from "../controllers/createURL.controller"
+const urldataRouter = Router();
+import createUrl from "../controllers/createURL.controller";
+import getUrl from "../controllers/getUrl.controller";
 
 urldataRouter.post("/", async (req, res) => {
-    const {url} = req.body
+  const { url } = req.body;
 
-    try{
+  if (!url || typeof url !== "string")
+    return res.status(400).json({ message: "Wrong request" });
 
-        const createdURL = await createUrl({url})
+  await fetch(url)
+    .then(async () => {
+      try {
+        const createdURL = await createUrl({ url });
 
-        return res.json(createdURL)
-    } catch{
-        return res.status(500).send("Internal server error")
-    }
+        return res.json(createdURL);
+      } catch {
+        return res.status(500).send("Internal server error");
+      }
+    })
+    .catch((error) => {
+      return res.status(404).json({ message: "Wrong domain. Try again" });
+    });
+});
 
-})
+urldataRouter.get("/:shortUrl", async (req, res) => {
+  const { shortUrl } = req.params;
 
-export default urldataRouter
+  try {
+    const getURLInfo = await getUrl({ shortUrl });
+    return res.json(getURLInfo);
+  } catch {
+    return res.status(404).send({ message: "Couldn't find requested url" });
+  }
+});
+
+export default urldataRouter;

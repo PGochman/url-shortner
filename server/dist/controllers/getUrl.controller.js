@@ -10,15 +10,11 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const urldata_model_1 = require("../models/urldata.model");
-function default_1({ url }) {
+function default_1({ shortUrl }) {
     return __awaiter(this, void 0, void 0, function* () {
-        const urlShortened = Math.random().toString(36).substring(2, 7);
         try {
-            const createdURL = yield urldata_model_1.UrlData.create({
-                originalURL: url,
-                shortURL: urlShortened,
-            });
-            return createdURL;
+            const urlInfo = yield urldata_model_1.UrlData.findOne({ where: { shortURL: shortUrl } });
+            return urlInfo;
         }
         catch (error) {
             return error;

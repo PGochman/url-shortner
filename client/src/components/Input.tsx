@@ -1,15 +1,19 @@
 "use client"
+import axios from "axios";
 import { FormEvent, useState } from "react";
+
+const URL_BASE = "http://localhost:3001"
 
 export const Input = () => {
 
 const [shortURL, setShortURL] = useState("")
 const [URL, setURL] = useState("")
 
-  const handleSubmit = (e : FormEvent) => {
+  const handleSubmit = async (e : FormEvent) => {
     e.preventDefault()
     
-    setShortURL("nvidsln")
+    const response = await axios.post(`${URL_BASE}/shortURL`, {url: URL})
+    setShortURL(`http://localhost:3000/${response.data.shortURL}`)
   };
   return (
     <form
