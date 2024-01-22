@@ -12,21 +12,18 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.connectionDB = exports.connection = void 0;
 const sequelize_typescript_1 = require("sequelize-typescript");
 require("dotenv").config();
-const { PORT, DB_USER, DB_PASSWORD, DB_HOST, DB_NAME } = process.env;
+const { PORT, DB_USER, DB_PASSWORD, DB_HOST, DB_NAME, SUPABASE_DEPLOY } = process.env;
 const urldata_model_1 = require("../models/urldata.model");
-exports.connection = new sequelize_typescript_1.Sequelize({
-    dialect: "postgres",
-    host: DB_HOST,
-    username: DB_USER,
-    password: DB_PASSWORD,
-    database: DB_NAME,
-    logging: false,
-    models: [urldata_model_1.UrlData]
+const user_model_1 = require("../models/user.model");
+exports.connection = new sequelize_typescript_1.Sequelize(`${SUPABASE_DEPLOY}`, {
+    models: [urldata_model_1.UrlData, user_model_1.User]
 });
+urldata_model_1.UrlData.belongsTo(user_model_1.User);
+user_model_1.User.hasMany(urldata_model_1.UrlData);
 function connectionDB() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            yield exports.connection.sync();
+            yield exports.connection.sync({ alter: true });
         }
         catch (error) {
             console.log(error);

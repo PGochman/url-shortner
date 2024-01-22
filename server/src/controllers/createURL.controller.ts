@@ -1,4 +1,5 @@
 import { UrlData } from "../models/urldata.model";
+import { User } from "../models/user.model";
 
 interface urlinfo {
   url: string;
