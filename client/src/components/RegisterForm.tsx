@@ -1,9 +1,9 @@
 "use client"
 
+import { useState, useEffect, FormEvent } from "react"
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs"
-import { useState } from "react"
 
-export default function LoginForm () {
+export default function RegisterForm () {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
 
@@ -13,22 +13,25 @@ export default function LoginForm () {
         await supabase.auth.signInWithOAuth({
             provider: "github",
             options: {
-                redirectTo: "localhost:3000/auth/callback"
+                redirectTo: "http://localhost:3000/auth/callback"
             }
         })
     }
 
-    const handleEmailSignIn = async () => {
-        const { data, error } = await supabase.auth.signInWithPassword({
-          email: 'example@email.com',
-          password: 'example-password'
+    const handleEmailSignUp = async (event: FormEvent) => {
+        event.preventDefault()
+        const { data, error } = await supabase.auth.signUp({
+          email: email,
+          password: password,
+          options: {
+            emailRedirectTo: "localhost:3000"
+          }
         })
     }
-
     return (
         <div>
-            <button className="border border-black bg-blue-200" onClick={handleGithubSignIn}>Sign in with github</button>
-            <form> 
+            <button onClick={handleGithubSignIn}>Sign up with github</button>
+            <form onSubmit={handleEmailSignUp}> 
                 <label htmlFor="email">Email</label>
                 <input type="email" name="email"/>
 
