@@ -1,11 +1,12 @@
 "use client"
 
 import RegisterForm from "@/components/RegisterForm"
+import DivContainer from "@/components/divContainer"
 
 export default function Page () {
     return (
-        <div>
+        <DivContainer>
             <RegisterForm/>
-        </div>
+        </DivContainer>
     )
 }
