@@ -4,7 +4,7 @@ import createUrl from "../controllers/createURL.controller";
 import getUrl from "../controllers/getUrl.controller";
 
 urldataRouter.post("/", async (req, res) => {
-  const { url } = req.body;
+  const { url, userId } = req.body;
 
   if (!url || typeof url !== "string")
     return res.status(400).json({ message: "Wrong request" });
@@ -12,7 +12,7 @@ urldataRouter.post("/", async (req, res) => {
   await fetch(url)
     .then(async () => {
       try {
-        const createdURL = await createUrl({ url });
+        const createdURL = await createUrl({ url, userId });
 
         return res.json(createdURL);
       } catch {

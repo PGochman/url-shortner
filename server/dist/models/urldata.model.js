@@ -23,9 +23,15 @@ __decorate([
         allowNull: false
     })
 ], UrlData.prototype, "shortURL", void 0);
+__decorate([
+    (0, sequelize_typescript_1.Column)({
+        type: sequelize_typescript_1.DataType.STRING,
+        allowNull: false
+    })
+], UrlData.prototype, "clickedTimes", void 0);
 exports.UrlData = UrlData = __decorate([
     (0, sequelize_typescript_1.Table)({
         timestamps: false,
-        tableName: "urldata"
+        tableName: "urldatas"
     })
 ], UrlData);

@@ -20,19 +20,20 @@ __decorate([
 ], User.prototype, "id", void 0);
 __decorate([
     (0, sequelize_typescript_1.Column)({
-        type: sequelize_typescript_1.DataType.STRING,
-        allowNull: false
+        type: sequelize_typescript_1.DataType.TEXT,
+        allowNull: true
     })
-], User.prototype, "userName", void 0);
+], User.prototype, "user_name", void 0);
 __decorate([
     (0, sequelize_typescript_1.Column)({
-        type: sequelize_typescript_1.DataType.STRING,
-        allowNull: false
+        type: sequelize_typescript_1.DataType.TEXT,
+        allowNull: true,
+        defaultValue: "https://thumbs.dreamstime.com/b/vector-de-perfil-avatar-predeterminado-foto-usuario-medios-sociales-icono-183042379.jpg"
     })
-], User.prototype, "password", void 0);
+], User.prototype, "image_url", void 0);
 exports.User = User = __decorate([
     (0, sequelize_typescript_1.Table)({
         timestamps: false,
-        tableName: "user"
+        tableName: "users"
     })
 ], User);

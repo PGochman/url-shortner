@@ -17,13 +17,13 @@ const urldataRouter = (0, express_1.Router)();
 const createURL_controller_1 = __importDefault(require("../controllers/createURL.controller"));
 const getUrl_controller_1 = __importDefault(require("../controllers/getUrl.controller"));
 urldataRouter.post("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { url } = req.body;
+    const { url, userId } = req.body;
     if (!url || typeof url !== "string")
         return res.status(400).json({ message: "Wrong request" });
     yield fetch(url)
         .then(() => __awaiter(void 0, void 0, void 0, function* () {
         try {
-            const createdURL = yield (0, createURL_controller_1.default)({ url });
+            const createdURL = yield (0, createURL_controller_1.default)({ url, userId });
             return res.json(createdURL);
         }
         catch (_a) {

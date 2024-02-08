@@ -3,7 +3,7 @@ import { UrlData } from "./urldata.model";
 
 @Table({
     timestamps: false,
-    tableName: "user"
+    tableName: "users"
 })
 
 export class User extends Model {
@@ -15,15 +15,16 @@ export class User extends Model {
     id !: string
 
     @Column({
-        type: DataType.STRING,
-        allowNull: false
+        type: DataType.TEXT,
+        allowNull: true
     })
-    userName !: string
+    user_name !: string
 
     @Column({
-        type: DataType.STRING,
-        allowNull: false
+        type: DataType.TEXT,
+        allowNull: true,
+        defaultValue: "https://thumbs.dreamstime.com/b/vector-de-perfil-avatar-predeterminado-foto-usuario-medios-sociales-icono-183042379.jpg"
     })
-    password !: string
+    image_url !: string
 
 }

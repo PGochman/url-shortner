@@ -3,7 +3,7 @@ import { User } from "./user.model";
 
 @Table({
     timestamps: false,
-    tableName: "urldata"
+    tableName: "urldatas"
 })
 
 export class UrlData extends Model {
@@ -18,4 +18,10 @@ export class UrlData extends Model {
         allowNull: false
     })
     shortURL !: string
+
+    @Column({
+        type: DataType.STRING,
+        allowNull: false
+    })
+    clickedTimes !: number
 }
