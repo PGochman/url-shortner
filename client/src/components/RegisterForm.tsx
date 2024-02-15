@@ -1,11 +1,13 @@
 "use client";
 
 import { useState, useEffect, FormEvent } from "react";
-import { supabase } from "@/app/supabase";
+import { signup } from "@/app/auth/login/actions";
 import GitHubButton from "./GithubButton";
 import { CldUploadWidget, CldUploadWidgetResults } from "next-cloudinary";
 import { ImageResult } from "@/utils/types";
 import axios from "axios";
+import { createClient } from "@/utils/supabase/client";
+
 
 export default function RegisterForm() {
   const [email, setEmail] = useState("");
@@ -14,6 +16,8 @@ export default function RegisterForm() {
   const [imageUrl, setImageUrl] = useState("");
 
   const handleEmailSignUp = async (event: FormEvent) => {
+    const supabase = createClient()
+
     event.preventDefault();
       const { data, error } = await supabase.auth.signUp({
         email: email,

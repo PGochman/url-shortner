@@ -1,5 +1,3 @@
-"use client"
-
 import RegisterForm from "@/components/RegisterForm"
 import DivContainer from "@/components/divContainer"
 

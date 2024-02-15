@@ -2,10 +2,9 @@
 import axios from "axios";
 import { FormEvent, useState } from "react";
 import DivContainer from "./divContainer";
-
 const URL_BASE = "http://localhost:3001";
 
-export const Input = () => {
+export function Input () {
   const [shortURL, setShortURL] = useState("");
   const [URL, setURL] = useState("");
 

@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import "./globals.css"
 import icon from "@/app/linkIcon.ico"
 import { inter } from './ui/fonts'
+import { Header } from '@/components/Header'
 
 export const metadata: Metadata = {
   title: 'URL Shortner - Practice App',
@@ -18,7 +19,10 @@ export default function RootLayout({
       <head>
         <link rel="icon" href={icon.src} sizes="any" />
       </head>
-      <body className={`${inter.className} antialised`} >{children}</body>
+      <body className={`${inter.className} antialised`} >
+        <Header/>
+        {children}
+      </body>
     </html>
   )
 }
